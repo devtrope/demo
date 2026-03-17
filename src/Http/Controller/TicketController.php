@@ -2,6 +2,7 @@
 
 namespace App\Http\Controller;
 
+use App\Http\Model\Ticket;
 use App\Http\Repository\TicketRepository;
 
 class TicketController extends BaseController
@@ -19,5 +20,18 @@ class TicketController extends BaseController
         }
         $this->set('ticket', $ticket);
         $this->render('ticket/index.html.twig');
+    }
+
+    public function add(): void
+    {
+        $this->render('ticket/add.html.twig');
+    }
+
+    public function postAdd()
+    {
+        $ticket = new Ticket();
+        $ticket->setTitle($_POST['title']);
+        $ticket->setDescription($_POST['description']);
+        $this->ticketRepository->save($ticket);
     }
 }
