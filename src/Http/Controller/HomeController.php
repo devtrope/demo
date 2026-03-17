@@ -13,7 +13,7 @@ class HomeController extends BaseController
 
     public function index(): void
     {
-        $this->set('tickets', $this->ticketRepository->all());
+        $this->set('tickets', $this->ticketRepository->getAllActive());
         $this->render('home/index.html.twig');
     }
 }

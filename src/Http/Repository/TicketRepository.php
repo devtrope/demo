@@ -7,7 +7,7 @@ use Ludens\Framework\AbstractRepository;
 
 class TicketRepository extends AbstractRepository
 {
-    protected function getModel(): string
+    public function getModel(): string
     {
         return Ticket::class;
     }
@@ -15,5 +15,10 @@ class TicketRepository extends AbstractRepository
     public function getTable(): string
     {
         return 'tickets';
+    }
+
+    public function getAllActive(): array
+    {
+        return $this->queryBuilder()->from($this->getTable())->select()->where('active = 1')->getResults();
     }
 }

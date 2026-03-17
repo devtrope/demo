@@ -9,6 +9,7 @@ class Ticket
     private int $id;
     private string $title;
     private string $description;
+    private bool $active;
     private DateTime $created_at;
 
     public function id()
@@ -39,6 +40,16 @@ class Ticket
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function active()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
     public function createdAt()
