@@ -13,9 +13,9 @@ class TicketController extends BaseController
 
     public function index(int $ticketId): void
     {
-        $ticket = $this->ticketRepository->find($ticketId);
-        if (false === $ticket->active()) {
-            throw new \Ludens\Exceptions\NotFoundException("Le ticket demandé n'existe pas");
+        $ticket = $this->ticketRepository->findOrNull($ticketId);
+        if (null === $ticket || false === $ticket->active()) {
+            throw new \Ludens\Exceptions\NotFoundException();
         }
         $this->set('ticket', $ticket);
         $this->render('ticket/index.html.twig');

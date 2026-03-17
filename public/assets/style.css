@@ -28,3 +28,20 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
 }
+
+.ticket-container
+{
+    padding: 64px;
+}
+
+.ticket-container__title
+{
+    margin-bottom: 64px;
+    font-weight: 900;
+    font-size: 4rem;
+}
+
+.ticket-container__description
+{
+    font-size: 1.4rem;
+}

@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ ticket.title }}{% endblock %}
+
 {% block content %}
     <div class="ticket-container">
         <div class="ticket-container__title">{{ ticket.title }}</div>
-        <div class="ticket-container__description">{{ ticket.description }}</div>
+        <div class="ticket-container__description">{{ ticket.description|nl2br }}</div>
     </div>
 {% endblock %}
