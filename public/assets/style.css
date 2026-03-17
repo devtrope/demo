@@ -1,0 +1,30 @@
+*
+{
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+.site-content
+{
+    width: 50%;
+    margin: auto;
+}
+
+.tickets-container
+{
+    padding: 64px;
+}
+
+.tickets-container__title
+{
+    margin-bottom: 64px;
+    font-weight: 900;
+    font-size: 4rem;
+}
+
+.tickets-container__grid
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
