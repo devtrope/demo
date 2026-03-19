@@ -13,6 +13,7 @@
                         <h5 class="card-title">{{ ticket.title }}</h5>
                         <p class="card-text">{{ ticket.description }}</p>
                         <a class="btn btn-primary" href="/ticket/{{ ticket.id }}">Accéder</a>
+                        <a class="btn btn-secondary" href="/ticket/update/{{ ticket.id }}">Modifier</a>
                     </div>
                     <div class="card-footer text-body-secondary">
                         Ajouté le {{ ticket.createdAt|date('d/m/Y à H:i') }}

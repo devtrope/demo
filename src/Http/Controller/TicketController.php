@@ -34,4 +34,20 @@ class TicketController extends BaseController
         $ticket->setDescription($_POST['description']);
         $this->ticketRepository->save($ticket);
     }
+
+    public function update(int $ticketId): void
+    {
+        $ticket = $this->ticketRepository->find($ticketId);
+        $this->set('ticket', $ticket);
+        $this->render('ticket/update.html.twig');
+    }
+
+    public function postUpdate()
+    {
+        $ticket = $this->ticketRepository->find($_POST['id']);
+        $ticket->setTitle($_POST['title']);
+        $ticket->setDescription($_POST['description']);
+        $this->ticketRepository->save($ticket);
+        $this->redirect('/');
+    }
 }
