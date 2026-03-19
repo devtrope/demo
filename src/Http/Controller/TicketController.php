@@ -36,6 +36,7 @@ class TicketController extends BaseController
         $ticket = new Ticket();
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
+        $ticket->setCreatedBy($this->userRepository->find(1));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
 
@@ -45,9 +46,9 @@ class TicketController extends BaseController
 
     public function update(int $ticketId): void
     {
-        $this->set('users', $this->userRepository->all());
         $ticket = $this->ticketRepository->find($ticketId);
         $this->set('ticket', $ticket);
+        $this->set('users', $this->userRepository->all());
         $this->render('ticket/update.html.twig');
     }
 
