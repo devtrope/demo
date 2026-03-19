@@ -4,6 +4,7 @@ namespace App\Http\Controller;
 
 use App\Http\Model\Ticket;
 use App\Http\Repository\TicketRepository;
+use Ludens\Http\Request;
 
 class TicketController extends BaseController
 {
@@ -27,12 +28,13 @@ class TicketController extends BaseController
         $this->render('ticket/add.html.twig');
     }
 
-    public function postAdd()
+    public function postAdd(Request $request)
     {
         $ticket = new Ticket();
-        $ticket->setTitle($_POST['title']);
-        $ticket->setDescription($_POST['description']);
+        $ticket->setTitle($request->data('title'));
+        $ticket->setDescription($request->data('description'));
         $this->ticketRepository->save($ticket);
+        $this->redirect('/');
     }
 
     public function update(int $ticketId): void
@@ -42,11 +44,11 @@ class TicketController extends BaseController
         $this->render('ticket/update.html.twig');
     }
 
-    public function postUpdate()
+    public function postUpdate(Request $request)
     {
-        $ticket = $this->ticketRepository->find($_POST['id']);
-        $ticket->setTitle($_POST['title']);
-        $ticket->setDescription($_POST['description']);
+        $ticket = $this->ticketRepository->find($request->data('id'));
+        $ticket->setTitle($request->data('title'));
+        $ticket->setDescription($request->data('description'));
         $this->ticketRepository->save($ticket);
         $this->redirect('/');
     }
