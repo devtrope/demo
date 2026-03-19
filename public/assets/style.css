@@ -15,9 +15,10 @@
     padding: 64px;
 }
 
-.tickets-container__title
+.tickets-container__title,
+.add-ticket h1
 {
-    margin-bottom: 64px;
+    margin-bottom: 32px;
     font-weight: 900;
     font-size: 4rem;
 }
@@ -27,6 +28,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
+    margin-top: 32px;
 }
 
 .ticket-container
@@ -44,4 +46,14 @@
 .ticket-container__description
 {
     font-size: 1.4rem;
+}
+
+.add-ticket
+{
+    padding: 64px;
+}
+
+.card-body a
+{
+    text-decoration: none;
 }

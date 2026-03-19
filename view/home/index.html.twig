@@ -4,15 +4,23 @@
 
 {% block content %}
     <div class="tickets-container">
+        {% if success is defined %}
+            <div class="alert alert-success">
+                {{ success }}
+            </div>
+        {% endif %}
         <div class="tickets-container__title">Mes tickets</div>
         <a href="/ticket/add" class="btn btn-primary">Ajouter un ticket</a>
         <div class="tickets-container__grid">
             {% for ticket in tickets %}
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ ticket.title }}</h5>
+                        <a href="/ticket/{{ ticket.id }}">
+                            <h5 class="card-title">{{ ticket.title }}</h5>
+                        </a>
                         <p class="card-text">{{ ticket.description }}</p>
-                        <a class="btn btn-primary" href="/ticket/{{ ticket.id }}">Accéder</a>
+                        <p class="text-body-secondary">Par {{ ticket.createdBy.firstName ~ " " ~  ticket.createdBy.name }}</p>
+                        <p class="text-body-secondary">Pour {{ ticket.attributedTo.firstName ~ " " ~  ticket.attributedTo.name }}</p>
                         <a class="btn btn-secondary" href="/ticket/update/{{ ticket.id }}">Modifier</a>
                     </div>
                     <div class="card-footer text-body-secondary">

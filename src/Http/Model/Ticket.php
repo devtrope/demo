@@ -10,6 +10,8 @@ class Ticket
     private string $title;
     private string $description;
     private bool $active;
+    private User $created_by;
+    private User $attributed_to;
     private DateTime $created_at;
 
     public function id()
@@ -52,6 +54,26 @@ class Ticket
         $this->active = $active;
     }
 
+    public function createdBy()
+    {
+        return $this->created_by;
+    }
+
+    public function setCreatedBy($created_by)
+    {
+        $this->created_by = $created_by;
+    }
+
+    public function attributedTo()
+    {
+        return $this->attributed_to;
+    }
+
+    public function setAttributedTo($attributed_to)
+    {
+        $this->attributed_to = $attributed_to;
+    }
+
     public function createdAt()
     {
         return $this->created_at;
@@ -60,5 +82,13 @@ class Ticket
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
+    }
+
+    public function hasOne()
+    {
+        return [
+            'created_by' => User::class,
+            'attributed_to' => User::class
+        ];
     }
 }

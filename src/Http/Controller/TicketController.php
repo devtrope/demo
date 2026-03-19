@@ -4,12 +4,14 @@ namespace App\Http\Controller;
 
 use App\Http\Model\Ticket;
 use App\Http\Repository\TicketRepository;
+use App\Http\Repository\UserRepository;
 use Ludens\Http\Request;
 
 class TicketController extends BaseController
 {
     public function __construct(
-        private TicketRepository $ticketRepository
+        private TicketRepository $ticketRepository,
+        private UserRepository $userRepository
     ) {
     }
 
@@ -25,6 +27,7 @@ class TicketController extends BaseController
 
     public function add(): void
     {
+        $this->set('users', $this->userRepository->all());
         $this->render('ticket/add.html.twig');
     }
 
@@ -33,12 +36,16 @@ class TicketController extends BaseController
         $ticket = new Ticket();
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
+        $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
+
+        $this->success('Le ticket a bien été ajouté');
         $this->redirect('/');
     }
 
     public function update(int $ticketId): void
     {
+        $this->set('users', $this->userRepository->all());
         $ticket = $this->ticketRepository->find($ticketId);
         $this->set('ticket', $ticket);
         $this->render('ticket/update.html.twig');
@@ -49,7 +56,10 @@ class TicketController extends BaseController
         $ticket = $this->ticketRepository->find($request->data('id'));
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
+        $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
+
+        $this->success('Le ticket a bien été mis à jour');
         $this->redirect('/');
     }
 }
