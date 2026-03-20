@@ -13,6 +13,7 @@ class TicketController extends BaseController
         private TicketRepository $ticketRepository,
         private UserRepository $userRepository
     ) {
+        parent::__construct();
     }
 
     public function index(int $ticketId): void

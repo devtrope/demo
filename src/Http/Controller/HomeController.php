@@ -9,6 +9,7 @@ class HomeController extends BaseController
     public function __construct(
         private TicketRepository $ticketRepository
     ) {
+        parent::__construct();
     }
 
     public function index(): void
