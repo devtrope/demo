@@ -14,11 +14,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <label for="title" class="form-label">Titre</label>
-                    <input type="text" class="form-control" name="title" id="title">
+                    <input type="text" class="form-control" name="title" id="title" value="{{ old.title }}">
                 </div>
                 <div class="col-lg-12 mt-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" name="description" id="description"></textarea>
+                    <textarea class="form-control" name="description" id="description">{{ old.description }}</textarea>
                 </div>
                 <div class="col-lg-12 mt-3">
                     <label for="attributed" class="form-label">Attribuer à</label>
