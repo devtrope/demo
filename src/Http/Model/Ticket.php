@@ -3,6 +3,7 @@
 namespace App\Http\Model;
 
 use DateTime;
+use Ludens\Validation\Required;
 
 class Ticket
 {
@@ -89,6 +90,14 @@ class Ticket
         return [
             'created_by' => User::class,
             'attributed_to' => User::class
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'title' => [new Required('Le titre est obligatoire')],
+            'description' => [new Required('La description est obligatoire')]
         ];
     }
 }

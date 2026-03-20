@@ -4,6 +4,11 @@
 
 {% block content %}
     <div class="add-ticket">
+        {% if error is defined %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
         <h1>Modifier un ticket</h1>
         <form action="/ticket/update" method="POST">
             <input type="hidden" name="id" value="{{ ticket.id }}" />

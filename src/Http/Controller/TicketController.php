@@ -34,6 +34,12 @@ class TicketController extends BaseController
     public function postAdd(Request $request)
     {
         $ticket = new Ticket();
+        $validation = $request->validate($ticket);
+        if (null !== $validation) {
+            $this->error($validation);
+            $this->redirect('/ticket/add');
+        }
+
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
         $ticket->setCreatedBy($this->userRepository->find(1));
@@ -55,6 +61,12 @@ class TicketController extends BaseController
     public function postUpdate(Request $request)
     {
         $ticket = $this->ticketRepository->find($request->data('id'));
+        $validation = $request->validate($ticket);
+        if (null !== $validation) {
+            $this->error($validation);
+            $this->redirect('/ticket/update/' . $request->data('id'));
+        }
+
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
