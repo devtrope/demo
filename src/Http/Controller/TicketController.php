@@ -37,7 +37,7 @@ class TicketController extends BaseController
         $validation = $request->validate($ticket);
         if (null !== $validation) {
             $this->error($validation);
-            $this->flash($request->data());
+            $this->flash($request->all());
             $this->redirect('/ticket/add');
         }
 
@@ -65,6 +65,7 @@ class TicketController extends BaseController
         $validation = $request->validate($ticket);
         if (null !== $validation) {
             $this->error($validation);
+            $this->flash($request->all());
             $this->redirect('/ticket/update/' . $request->data('id'));
         }
 
