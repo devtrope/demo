@@ -2,6 +2,7 @@
 
 namespace App\Http\Model;
 
+use App\Http\Rules\MinWords;
 use DateTime;
 use Ludens\Validation\Required;
 
@@ -96,8 +97,13 @@ class Ticket
     public function rules()
     {
         return [
-            'title' => [new Required('Le titre est obligatoire')],
-            'description' => [new Required('La description est obligatoire')]
+            'title' => [
+                new Required()
+            ],
+            'description' => [
+                new Required(),
+                new MinWords()
+            ]
         ];
     }
 }
