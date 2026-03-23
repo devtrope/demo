@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Ludens\Console\CommandRunner;
+use Ludens\Core\CliApplication;
+
+$cli = new CliApplication();
+$cli->boot(__DIR__ . '/..');
+
+$runner = new CommandRunner($argv);
+$runner->execute();
