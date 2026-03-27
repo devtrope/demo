@@ -21,7 +21,7 @@ class Ticket
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -31,7 +31,7 @@ class Ticket
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -41,7 +41,7 @@ class Ticket
         return $this->description;
     }
 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
@@ -51,7 +51,7 @@ class Ticket
         return $this->active;
     }
 
-    public function setActive($active)
+    public function setActive(bool $active)
     {
         $this->active = $active;
     }
@@ -61,7 +61,7 @@ class Ticket
         return $this->created_by;
     }
 
-    public function setCreatedBy($created_by)
+    public function setCreatedBy(User $created_by)
     {
         $this->created_by = $created_by;
     }
@@ -71,7 +71,7 @@ class Ticket
         return $this->attributed_to;
     }
 
-    public function setAttributedTo($attributed_to)
+    public function setAttributedTo(User $attributed_to)
     {
         $this->attributed_to = $attributed_to;
     }
@@ -81,7 +81,7 @@ class Ticket
         return $this->created_at;
     }
 
-    public function setCreatedAt($created_at)
+    public function setCreatedAt(DateTime $created_at)
     {
         $this->created_at = $created_at;
     }
