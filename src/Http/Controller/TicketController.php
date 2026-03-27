@@ -30,7 +30,7 @@ class TicketController extends BaseController
 
     public function add(): Response
     {
-        return $this->render('ticket/add.html.twig', [
+        return $this->view('ticket/add.html.twig', [
             'users' => $this->userRepository->all()
         ]);
     }
@@ -58,7 +58,7 @@ class TicketController extends BaseController
     public function update(int $ticketId): Response
     {
         return $this->view('ticket/update.html.twig', [
-            'ticker' => $this->ticketRepository->find($ticketId),
+            'ticket' => $this->ticketRepository->find($ticketId),
             'users' => $this->userRepository->all()
         ]);
     }
@@ -80,5 +80,11 @@ class TicketController extends BaseController
 
         $this->success('Le ticket a bien été mis à jour');
         return $this->redirect('/');
+    }
+
+    public function list()
+    {
+        $data = $this->ticketRepository->getAllActive();
+        return $this->json($data);
     }
 }
