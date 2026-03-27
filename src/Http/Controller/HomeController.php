@@ -3,6 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Http\Repository\TicketRepository;
+use Ludens\Http\Response;
 
 class HomeController extends BaseController
 {
@@ -12,9 +13,10 @@ class HomeController extends BaseController
         parent::__construct();
     }
 
-    public function index(): void
+    public function index(): Response
     {
-        $this->set('tickets', $this->ticketRepository->getAllActive());
-        $this->render('home/index.html.twig');
+        return $this->view('home/index.html.twig', [
+            'tickets' => $this->ticketRepository->getAllActive()
+        ]);
     }
 }

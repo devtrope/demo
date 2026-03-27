@@ -6,6 +6,7 @@ use App\Http\Model\Ticket;
 use App\Http\Repository\TicketRepository;
 use App\Http\Repository\UserRepository;
 use Ludens\Http\Request;
+use Ludens\Http\Response;
 
 class TicketController extends BaseController
 {
@@ -16,30 +17,32 @@ class TicketController extends BaseController
         parent::__construct();
     }
 
-    public function index(int $ticketId): void
+    public function index(int $ticketId): Response
     {
         $ticket = $this->ticketRepository->findOrNull($ticketId);
         if (null === $ticket || false === $ticket->active()) {
             throw new \Ludens\Exceptions\NotFoundException();
         }
-        $this->set('ticket', $ticket);
-        $this->render('ticket/index.html.twig');
+        return $this->view('ticket/index.html.twig', [
+            'ticket' => $ticket
+        ]);
     }
 
-    public function add(): void
+    public function add(): Response
     {
-        $this->set('users', $this->userRepository->all());
-        $this->render('ticket/add.html.twig');
+        return $this->render('ticket/add.html.twig', [
+            'users' => $this->userRepository->all()
+        ]);
     }
 
-    public function postAdd(Request $request)
+    public function postAdd(Request $request): Response
     {
         $ticket = new Ticket();
         $validation = $request->validate($ticket);
         if (null !== $validation) {
             $this->error($validation);
             $this->flash($request->all());
-            $this->redirect('/ticket/add');
+            return $this->redirect('/ticket/add');
         }
 
         $ticket->setTitle($request->data('title'));
@@ -49,25 +52,25 @@ class TicketController extends BaseController
         $this->ticketRepository->save($ticket);
 
         $this->success('Le ticket a bien été ajouté');
-        $this->redirect('/');
+        return $this->redirect('/');
     }
 
-    public function update(int $ticketId): void
+    public function update(int $ticketId): Response
     {
-        $ticket = $this->ticketRepository->find($ticketId);
-        $this->set('ticket', $ticket);
-        $this->set('users', $this->userRepository->all());
-        $this->render('ticket/update.html.twig');
+        return $this->view('ticket/update.html.twig', [
+            'ticker' => $this->ticketRepository->find($ticketId),
+            'users' => $this->userRepository->all()
+        ]);
     }
 
-    public function postUpdate(Request $request)
+    public function postUpdate(Request $request): Response
     {
         $ticket = $this->ticketRepository->find($request->data('id'));
         $validation = $request->validate($ticket);
         if (null !== $validation) {
             $this->error($validation);
             $this->flash($request->all());
-            $this->redirect('/ticket/update/' . $request->data('id'));
+            return $this->redirect('/ticket/update/' . $request->data('id'));
         }
 
         $ticket->setTitle($request->data('title'));
@@ -76,6 +79,6 @@ class TicketController extends BaseController
         $this->ticketRepository->save($ticket);
 
         $this->success('Le ticket a bien été mis à jour');
-        $this->redirect('/');
+        return $this->redirect('/');
     }
 }
