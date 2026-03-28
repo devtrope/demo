@@ -11,6 +11,7 @@ class Ticket
     private int $id;
     private string $title;
     private string $description;
+    private ?string $picture;
     private bool $active;
     private User $created_by;
     private User $attributed_to;
@@ -44,6 +45,16 @@ class Ticket
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    public function picture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture)
+    {
+        $this->picture = $picture;
     }
 
     public function active()

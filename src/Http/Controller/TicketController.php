@@ -47,6 +47,10 @@ class TicketController extends BaseController
 
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
+        if (null !== $request->data('picture')) {
+            $picture = $request->image($request->data('picture'));
+            $ticket->setPicture($picture);
+        }
         $ticket->setCreatedBy($this->userRepository->find(1));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
@@ -75,16 +79,11 @@ class TicketController extends BaseController
 
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
+        $ticket->setPicture($request->data('picture'));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
 
         $this->success('Le ticket a bien été mis à jour');
         return $this->redirect('/');
-    }
-
-    public function list()
-    {
-        $data = $this->ticketRepository->getAllActive();
-        return $this->json($data);
     }
 }
