@@ -10,7 +10,7 @@
             </div>
         {% endif %}
         <h1>Modifier un ticket</h1>
-        <form action="/ticket/update" method="POST">
+        <form action="/ticket/update" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{ ticket.id }}" />
             <div class="row">
                 <div class="col-lg-6">
@@ -23,7 +23,12 @@
                 </div>
                 <div class="col-lg-12 mt-3">
                     <label for="picture" class="form-label">Image</label>
-                    <input type="text" class="form-control" name="picture" id="picture" value="{{ old.picture ?? ticket.picture }}">
+                    {% if ticket.picture is not null %}
+                        <br/>
+                        <img src="{{ image(ticket.picture) }}" style="width: 250px; height: 250px; object-fit: cover;" />
+                        <br/><br/>
+                    {% endif %}
+                    <input type="file" class="form-control" name="picture" id="picture">
                 </div>
                 <div class="col-lg-12 mt-3">
                     <label for="attributed" class="form-label">Attribuer à</label>

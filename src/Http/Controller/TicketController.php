@@ -51,7 +51,7 @@ class TicketController extends BaseController
             $picture = $request->image($request->data('picture'));
             $ticket->setPicture($picture);
         }
-        $ticket->setCreatedBy($this->userRepository->find(1));
+        $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
 
@@ -79,7 +79,10 @@ class TicketController extends BaseController
 
         $ticket->setTitle($request->data('title'));
         $ticket->setDescription($request->data('description'));
-        $ticket->setPicture($request->data('picture'));
+        if (null !== $request->data('picture')) {
+            $picture = $request->image($request->data('picture'));
+            $ticket->setPicture($picture);
+        }
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
 

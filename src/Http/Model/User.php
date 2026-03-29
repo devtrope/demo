@@ -7,6 +7,7 @@ use DateTime;
 class User
 {
     private int $id;
+    private string $username;
     private string $name;
     private string $first_name;
     private DateTime $created_at;
@@ -19,6 +20,16 @@ class User
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    public function username()
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
     }
 
     public function name()

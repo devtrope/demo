@@ -10,7 +10,9 @@
             </div>
         {% endif %}
         <div class="tickets-container__title">Mes tickets</div>
-        <a href="/ticket/add" class="btn btn-primary">Ajouter un ticket</a>
+        {% if auth is defined %}
+            <a href="/ticket/add" class="btn btn-primary">Ajouter un ticket</a>
+        {% endif %}
         <div class="tickets-container__grid">
             {% for ticket in tickets %}
                 <div class="card">
@@ -24,7 +26,9 @@
                         <p class="card-text">{{ ticket.description }}</p>
                         <p class="text-body-secondary">Par {{ ticket.createdBy.firstName ~ " " ~  ticket.createdBy.name }}</p>
                         <p class="text-body-secondary">Pour {{ ticket.attributedTo.firstName ~ " " ~  ticket.attributedTo.name }}</p>
-                        <a class="btn btn-secondary" href="/ticket/update/{{ ticket.id }}">Modifier</a>
+                        {% if auth is defined %}
+                            <a class="btn btn-secondary" href="/ticket/update/{{ ticket.id }}">Modifier</a>
+                        {% endif %}
                     </div>
                     <div class="card-footer text-body-secondary">
                         Ajouté le {{ ticket.createdAt|date('d/m/Y à H:i') }}
