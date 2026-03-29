@@ -8,7 +8,6 @@ class LogoutController extends BaseController
 {
     public function postIndex(): Response
     {
-        $this->logout();
-        return $this->redirect('/');
+        return $this->logout();
     }
 }

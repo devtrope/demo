@@ -8,6 +8,7 @@ class User
 {
     private int $id;
     private string $username;
+    private string $password;
     private string $name;
     private string $first_name;
     private DateTime $created_at;
@@ -30,6 +31,16 @@ class User
     public function setUsername(string $username)
     {
         $this->username = $username;
+    }
+
+    public function password()
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
     }
 
     public function name()
