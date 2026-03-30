@@ -7,6 +7,7 @@ use App\Http\Model\Ticket;
 use App\Http\Repository\HistoryRepository;
 use App\Http\Repository\TicketRepository;
 use App\Http\Repository\UserRepository;
+use App\Http\Services\HistoryService;
 use Ludens\Http\Request;
 use Ludens\Http\Response;
 
@@ -15,7 +16,8 @@ class TicketController extends BaseController
     public function __construct(
         private TicketRepository $ticketRepository,
         private UserRepository $userRepository,
-        private HistoryRepository $historyRepository
+        private HistoryRepository $historyRepository,
+        private HistoryService $historyService
     ) {
         parent::__construct();
     }
@@ -59,11 +61,7 @@ class TicketController extends BaseController
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $ticket = $this->ticketRepository->save($ticket);
         
-        $history = new History();
-        $history->setTicket($ticket);
-        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
-        $history->setHistoryText('Création du ticket');
-        $this->historyRepository->save($history);
+        $this->historyService->insert('Création du ticket', $ticket, $this->currentAuth());
 
         $this->success('Le ticket a bien été ajouté');
         return $this->redirect('/');
@@ -96,11 +94,7 @@ class TicketController extends BaseController
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
 
-        $history = new History();
-        $history->setTicket($ticket);
-        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
-        $history->setHistoryText('Modification du ticket');
-        $this->historyRepository->save($history);
+        $this->historyService->insert('Modification du ticket', $ticket, $this->currentAuth());
 
         $this->success('Le ticket a bien été mis à jour');
         return $this->redirect('/');
@@ -112,12 +106,8 @@ class TicketController extends BaseController
         $ticket->setActive(false);
         $this->ticketRepository->save($ticket);
 
-        $history = new History();
-        $history->setTicket($ticket);
-        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
-        $history->setHistoryText('Suppression du ticket');
-        $this->historyRepository->save($history);
-
+        $this->historyService->insert('Suppression du ticket', $ticket, $this->currentAuth());
+        
         $this->success('Le ticket a bien été supprimé');
         return $this->redirect('/');
     }
