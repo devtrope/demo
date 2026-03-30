@@ -57,10 +57,10 @@ class TicketController extends BaseController
         }
         $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
-        $ticketId = $this->ticketRepository->save($ticket);
+        $ticket = $this->ticketRepository->save($ticket);
         
         $history = new History();
-        $history->setTicket($this->ticketRepository->find($ticketId));
+        $history->setTicket($ticket);
         $history->setUser($this->userRepository->find($this->currentAuth()->id()));
         $history->setHistoryText('Création du ticket');
         $this->historyRepository->save($history);
@@ -97,12 +97,28 @@ class TicketController extends BaseController
         $this->ticketRepository->save($ticket);
 
         $history = new History();
-        $history->setTicket($this->ticketRepository->find($ticket->id()));
+        $history->setTicket($ticket);
         $history->setUser($this->userRepository->find($this->currentAuth()->id()));
         $history->setHistoryText('Modification du ticket');
         $this->historyRepository->save($history);
 
         $this->success('Le ticket a bien été mis à jour');
+        return $this->redirect('/');
+    }
+
+    public function delete(int $ticketId): Response
+    {
+        $ticket = $this->ticketRepository->find($ticketId);
+        $ticket->setActive(false);
+        $this->ticketRepository->save($ticket);
+
+        $history = new History();
+        $history->setTicket($ticket);
+        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
+        $history->setHistoryText('Suppression du ticket');
+        $this->historyRepository->save($history);
+
+        $this->success('Le ticket a bien été supprimé');
         return $this->redirect('/');
     }
 }
