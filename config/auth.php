@@ -41,9 +41,18 @@ return [
 
     /*
      |-------------------------------------------------------------
-     | Route to login
+     | Route security configuration
+     |
+     | Define which routes require authentication:
+     |
+     |  - auth => true  : accessible only if the user is authenticated
+     |  - auth => false : accessible only if the user is NOT authenticated
+     |
      |-------------------------------------------------------------
      */
-    'login_route' => '/login',
+    'security' => [
+        '/login' => ['auth' => false],
+        '/ticket/update/*' => ['auth' => true, 'error' => 'Veuillez vous connecter pour accéder à cette page'],
+    ],
     
 ];
