@@ -3,6 +3,8 @@
 namespace App\Http\Controller;
 
 use Exception;
+use Ludens\Exceptions\BadCredentialsException;
+use Ludens\Exceptions\UserNotFoundException;
 use Ludens\Http\Request;
 use Ludens\Http\Response;
 
@@ -17,7 +19,11 @@ class LoginController extends BaseController
     {
         try {
             return $this->authenticate($request);
-        } catch (Exception $e) {
+        } catch (UserNotFoundException $e) {
+            $this->error($e->getMessage());
+            $this->flash($request->all());
+            return $this->redirect('/login');
+        } catch (BadCredentialsException $e) {
             $this->error($e->getMessage());
             $this->flash($request->all());
             return $this->redirect('/login');
