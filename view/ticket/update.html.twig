@@ -1,48 +1,59 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Modifier un ticket{% endblock %}
-
+{% block title %}Modifier — {{ ticket.title }}{% endblock %}
 {% block content %}
-    <div class="add-ticket">
-        {% if error is defined %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-        {% endif %}
-        <h1>Modifier un ticket</h1>
-        <form action="/ticket/update" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="{{ ticket.id }}" />
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="title" class="form-label">Titre</label>
-                    <input type="text" class="form-control" name="title" id="title" value="{{ old.title ?? ticket.title }}">
-                </div>
-                <div class="col-lg-12 mt-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" name="description" id="description">{{ old.description ?? ticket.description }}</textarea>
-                </div>
-                <div class="col-lg-12 mt-3">
-                    <label for="picture" class="form-label">Image</label>
-                    {% if ticket.picture is not null %}
-                        <br/>
-                        <img src="{{ image(ticket.picture) }}" style="width: 250px; height: 250px; object-fit: cover;" />
-                        <br/><br/>
-                    {% endif %}
-                    <input type="file" class="form-control" name="picture" id="picture">
-                </div>
-                <div class="col-lg-12 mt-3">
-                    <label for="attributed" class="form-label">Attribuer à</label>
-                    <select class="form-select" name="attributed" id="attributed">
-                        {% set attributed = old.attributed ?? ticket.attributedTo.id %}
-                        {% for user in users %}
-                            <option value="{{ user.id }}" {% if user.id == attributed %}selected="selected"{% endif %}>{{ user.firstName ~  " " ~  user.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-12 mt-3">
-                    <button class="btn btn-primary">Modifier le ticket</button>
-                </div>
-            </div>
-        </form>
+
+<div class="max-w-2xl">
+    <div class="mb-8">
+        <a href="/ticket/{{ ticket.id }}" class="text-sm text-ink-muted hover:text-ink-secondary transition-colors inline-flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Retour
+        </a>
+        <h1 class="text-2xl font-medium text-ink-primary mt-3">Modifier le ticket</h1>
     </div>
+
+    <form action="/ticket/update" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <input type="hidden" name="id" value="{{ ticket.id }}">
+
+        <div>
+            <label for="title" class="block text-sm text-ink-secondary mb-1.5">Titre</label>
+            <input type="text" name="title" id="title" value="{{ old.title ?? ticket.title }}"
+                class="w-full bg-surface-raised border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-primary placeholder-ink-muted focus:outline-none focus:border-accent transition-colors">
+        </div>
+
+        <div>
+            <label for="description" class="block text-sm text-ink-secondary mb-1.5">Description</label>
+            <textarea name="description" id="description" rows="5"
+                class="w-full bg-surface-raised border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-primary placeholder-ink-muted focus:outline-none focus:border-accent transition-colors resize-none">{{ old.description ?? ticket.description }}</textarea>
+        </div>
+
+        <div>
+            <label for="picture" class="block text-sm text-ink-secondary mb-1.5">Image <span class="text-ink-muted">(optionnel)</span></label>
+            {% if ticket.picture is not null %}
+                <img src="{{ image(ticket.picture) }}" class="w-24 h-24 object-cover rounded-lg mb-2" />
+            {% endif %}
+            <input type="file" name="picture" id="picture"
+                class="w-full bg-surface-raised border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-muted file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-accent-muted file:text-accent file:text-xs file:font-medium cursor-pointer focus:outline-none focus:border-accent transition-colors">
+        </div>
+
+        <div>
+            <label for="attributed" class="block text-sm text-ink-secondary mb-1.5">Attribué à</label>
+            {% set attributed = old.attributed ?? ticket.attributedTo.id %}
+            <select name="attributed" id="attributed"
+                class="w-full bg-surface-raised border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-primary focus:outline-none focus:border-accent transition-colors appearance-none">
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == attributed %}selected{% endif %}>
+                        {{ user.firstName ~ " " ~ user.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pt-2">
+            <button type="submit" class="px-5 py-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-lg transition-colors">
+                Enregistrer les modifications
+            </button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}
