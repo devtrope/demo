@@ -17,7 +17,7 @@
                     <label for="username" class="block text-sm text-ink-secondary mb-1.5">Nom d'utilisateur</label>
                     <input type="text" name="username" id="username" autocomplete="username"
                         class="w-full bg-surface border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-primary placeholder-ink-muted focus:outline-none focus:border-accent transition-colors"
-                        placeholder="votre_nom">
+                        placeholder="votre_nom" value="{{ old.username ?? '' }}">
                 </div>
 
                 <div>
