@@ -39,6 +39,18 @@
                 <p class="text-sm font-mono text-ink-secondary">{{ ticket.createdAt|date('d/m/Y à H:i') }}</p>
             </div>
         </div>
+
+        <div class="mt-6 pt-5 border-t border-surface-border">
+            <p class="text-sm text-ink-primary mb-4">Historique</p>
+            <div class="flex flex-col gap-4">
+                {% for history in histories %}
+                    <div>
+                        <p class="text-xs text-ink-muted mb-1">{{ history.createdAt|date('d/m/Y à H:i') }}</p>
+                        <p class="text-sm text-ink-primary">{{ history.historyText ~ " - " ~  history.user.firstName ~ " " ~ history.user.name }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controller;
 
+use App\Http\Model\History;
 use App\Http\Model\Ticket;
+use App\Http\Repository\HistoryRepository;
 use App\Http\Repository\TicketRepository;
 use App\Http\Repository\UserRepository;
 use Ludens\Http\Request;
@@ -12,7 +14,8 @@ class TicketController extends BaseController
 {
     public function __construct(
         private TicketRepository $ticketRepository,
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private HistoryRepository $historyRepository
     ) {
         parent::__construct();
     }
@@ -24,7 +27,8 @@ class TicketController extends BaseController
             throw new \Ludens\Exceptions\NotFoundException();
         }
         return $this->view('ticket/index.html.twig', [
-            'ticket' => $ticket
+            'ticket' => $ticket,
+            'histories' => $this->historyRepository->getAllByTicket($ticketId)
         ]);
     }
 
@@ -53,7 +57,13 @@ class TicketController extends BaseController
         }
         $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
-        $this->ticketRepository->save($ticket);
+        $ticketId = $this->ticketRepository->save($ticket);
+        
+        $history = new History();
+        $history->setTicket($this->ticketRepository->find($ticketId));
+        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
+        $history->setHistoryText('Création du ticket');
+        $this->historyRepository->save($history);
 
         $this->success('Le ticket a bien été ajouté');
         return $this->redirect('/');
@@ -85,6 +95,12 @@ class TicketController extends BaseController
         }
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
         $this->ticketRepository->save($ticket);
+
+        $history = new History();
+        $history->setTicket($this->ticketRepository->find($ticket->id()));
+        $history->setUser($this->userRepository->find($this->currentAuth()->id()));
+        $history->setHistoryText('Modification du ticket');
+        $this->historyRepository->save($history);
 
         $this->success('Le ticket a bien été mis à jour');
         return $this->redirect('/');
