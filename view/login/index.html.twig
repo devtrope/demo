@@ -12,7 +12,7 @@
 
         <div class="bg-surface-raised border border-surface-border rounded-xl p-6">
             <form action="/login" method="POST" class="space-y-4">
-
+                {{ csrf() }}
                 <div>
                     <label for="username" class="block text-sm text-ink-secondary mb-1.5">Nom d'utilisateur</label>
                     <input type="text" name="username" id="username" autocomplete="username"

@@ -12,6 +12,7 @@
     </div>
 
     <form action="/ticket/add" method="POST" enctype="multipart/form-data" class="space-y-5">
+        {{ csrf() }}
 
         <div>
             <label for="title" class="block text-sm text-ink-secondary mb-1.5">Titre</label>

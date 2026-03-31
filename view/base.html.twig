@@ -65,6 +65,7 @@
                     <span class="text-sm text-ink-muted">|</span>
                     <span class="text-sm text-ink-primary font-medium">{{ auth.firstName ~ " " ~ auth.name }}</span>
                     <form method="POST" action="/logout" class="inline">
+                        {{ csrf() }}
                         <button type="submit" class="text-sm text-ink-secondary hover:text-status-danger transition-colors">
                             Déconnexion
                         </button>

@@ -12,6 +12,7 @@
     </div>
 
     <form action="/ticket/update" method="POST" enctype="multipart/form-data" class="space-y-5">
+        {{ csrf() }}
         <input type="hidden" name="id" value="{{ ticket.id }}">
 
         <div>
