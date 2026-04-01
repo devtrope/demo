@@ -2,9 +2,8 @@
 
 namespace App\Http\Controller;
 
-use Exception;
-use Ludens\Exceptions\BadCredentialsException;
-use Ludens\Exceptions\UserNotFoundException;
+use Ludens\Exceptions\Authentication\BadCredentialsException;
+use Ludens\Exceptions\Authentication\UserNotFoundException;
 use Ludens\Http\Request;
 use Ludens\Http\Response;
 

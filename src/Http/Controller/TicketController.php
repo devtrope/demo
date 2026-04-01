@@ -26,7 +26,7 @@ class TicketController extends BaseController
     {
         $ticket = $this->ticketRepository->findOrNull($ticketId);
         if (null === $ticket || false === $ticket->active()) {
-            throw new \Ludens\Exceptions\NotFoundException();
+            throw new \Ludens\Exceptions\System\NotFoundException();
         }
         return $this->view('ticket/index.html.twig', [
             'ticket' => $ticket,
