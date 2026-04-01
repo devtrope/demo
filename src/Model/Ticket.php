@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Model;
+namespace App\Model;
 
-use App\Http\Rules\MinWords;
+use App\Rules\MinWords;
 use DateTime;
 use Ludens\Validation\Required;
 

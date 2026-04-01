@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Rules;
+namespace App\Rules;
 
 use Ludens\Validation\Contracts\RuleInterface;
 

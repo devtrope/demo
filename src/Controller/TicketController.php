@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controller;
+namespace App\Controller;
 
-use App\Http\Model\History;
-use App\Http\Model\Ticket;
-use App\Http\Repository\HistoryRepository;
-use App\Http\Repository\TicketRepository;
-use App\Http\Repository\UserRepository;
-use App\Http\Services\HistoryService;
+use App\Model\Ticket;
+use App\Repository\HistoryRepository;
+use App\Repository\TicketRepository;
+use App\Repository\UserRepository;
+use App\Services\HistoryService;
 use Ludens\Http\Request;
 use Ludens\Http\Response;
 

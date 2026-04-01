@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repository;
+namespace App\Repository;
 
-use App\Http\Model\History;
+use App\Model\History;
 use Ludens\Framework\AbstractRepository;
 
 class HistoryRepository extends AbstractRepository

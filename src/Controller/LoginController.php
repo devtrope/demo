@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controller;
+namespace App\Controller;
 
 use Ludens\Exceptions\Authentication\BadCredentialsException;
 use Ludens\Exceptions\Authentication\UserNotFoundException;

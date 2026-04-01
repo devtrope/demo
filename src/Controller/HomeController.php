@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controller;
+namespace App\Controller;
 
-use App\Http\Repository\TicketRepository;
+use App\Repository\TicketRepository;
 use Ludens\Http\Response;
 
 class HomeController extends BaseController

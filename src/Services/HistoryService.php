@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
-use App\Http\Model\History;
-use App\Http\Model\Ticket;
-use App\Http\Model\User;
-use App\Http\Repository\HistoryRepository;
+use App\Model\History;
+use App\Model\Ticket;
+use App\Model\User;
+use App\Repository\HistoryRepository;
 
 class HistoryService
 {

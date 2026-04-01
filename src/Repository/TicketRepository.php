@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repository;
+namespace App\Repository;
 
-use App\Http\Model\Ticket;
+use App\Model\Ticket;
 use Ludens\Framework\AbstractRepository;
 
 class TicketRepository extends AbstractRepository
