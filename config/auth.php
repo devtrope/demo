@@ -52,15 +52,17 @@ return [
      |
      | Define which routes require authentication:
      |
-     |  - auth => true  : accessible only if the user is authenticated
+     |  - auth => true : accessible only if the user is authenticated
      |  - auth => false : accessible only if the user is NOT authenticated
+     |
+     |  - access => true : accessible for every user
      |
      |-------------------------------------------------------------
      */
     'security' => [
         '/login' => ['auth' => false],
-        '/ticket/update/*' => ['auth' => true, 'error' => 'Veuillez vous connecter pour accéder à cette page'],
-        '/ticket/add' => ['auth' => true, 'error' => 'Veuillez vous connecter pour accéder à cette page'],
+        '/*' => ['auth' => true, 'error' => 'Veuillez vous connecter pour accéder à cette page'],
+        '/contact' => ['access' => true]
     ],
     
 ];
