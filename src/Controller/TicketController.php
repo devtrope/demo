@@ -55,8 +55,7 @@ class TicketController extends BaseController
         $ticket = $this->ticketRepository->save($ticket);
         $this->historyService->insert('Création du ticket', $ticket, $this->currentAuth());
 
-        $this->success('Le ticket a bien été ajouté');
-        return $this->redirect('/');
+        return $this->redirect('/', ['success' => 'Le ticket a bien été ajouté']);
     }
 
     public function update(int $ticketId): Response
@@ -82,8 +81,7 @@ class TicketController extends BaseController
 
         $this->historyService->insert('Modification du ticket', $ticket, $this->currentAuth());
 
-        $this->success('Le ticket a bien été mis à jour');
-        return $this->redirect('/');
+        return $this->redirect('/', ['success' => 'Le ticket a bien été mis à jour']);
     }
 
     public function delete(int $ticketId): Response
@@ -94,7 +92,6 @@ class TicketController extends BaseController
 
         $this->historyService->insert('Suppression du ticket', $ticket, $this->currentAuth());
         
-        $this->success('Le ticket a bien été supprimé');
-        return $this->redirect('/');
+        return $this->redirect('/', ['success' => 'Le ticket a bien été supprimé']);
     }
 }

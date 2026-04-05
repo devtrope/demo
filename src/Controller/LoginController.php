@@ -18,9 +18,10 @@ class LoginController extends BaseController
         try {
             return $this->authenticator($request)->authenticate();
         } catch (AuthenticationException $e) {
-            $this->error($e->getMessage());
-            $this->flash($request->all());
-            return $this->redirect('/login');
+            return $this->redirect('/login', [
+                'error' => $e->getMessage(),
+                'old' => $request->all()
+            ]);
         }
     }
 }

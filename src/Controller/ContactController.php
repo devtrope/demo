@@ -18,8 +18,6 @@ class ContactController extends BaseController
         $request->validate([
             'mail' => [new Required()]
         ]);
-        
-        $this->success('Votre message a bien été envoyé');
-        return $this->redirect('/');
+        return $this->redirect('/', ['success' => 'Votre message a bien été envoyé']);
     }
 }
