@@ -15,13 +15,6 @@ class LoginController extends BaseController
 
     public function postIndex(Request $request): Response
     {
-        try {
-            return $this->authenticator($request)->authenticate();
-        } catch (AuthenticationException $e) {
-            return $this->redirect('/login', [
-                'error' => $e->getMessage(),
-                'old' => $request->all()
-            ]);
-        }
+        return $this->authenticator($request)->authenticate();
     }
 }
