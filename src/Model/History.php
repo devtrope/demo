@@ -62,7 +62,7 @@ class History
         $this->created_at = $created_at;
     }
 
-    public function hasOne()
+    public function hasOne(): array
     {
         return [
             'ticket' => Ticket::class,

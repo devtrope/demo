@@ -45,15 +45,14 @@ class TicketController extends BaseController
         $ticket = new Ticket();
         $request->validate($ticket);
 
-        $ticket->setTitle($request->data('title'));
-        $ticket->setDescription($request->data('description'));
+        $request->fill($ticket);
         if ($request->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
         }
         $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
+
         $ticket = $this->ticketRepository->save($ticket);
-        
         $this->historyService->insert('Création du ticket', $ticket, $this->currentAuth());
 
         $this->success('Le ticket a bien été ajouté');
@@ -73,12 +72,12 @@ class TicketController extends BaseController
         $ticket = $this->ticketRepository->find($request->data('id'));
         $request->validate($ticket);
 
-        $ticket->setTitle($request->data('title'));
-        $ticket->setDescription($request->data('description'));
+        $ticket = $request->fill($ticket);
         if ($request->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
         }
         $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
+
         $this->ticketRepository->save($ticket);
 
         $this->historyService->insert('Modification du ticket', $ticket, $this->currentAuth());

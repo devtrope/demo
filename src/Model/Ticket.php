@@ -97,7 +97,7 @@ class Ticket
         $this->created_at = $created_at;
     }
 
-    public function hasOne()
+    public function hasOne(): array
     {
         return [
             'created_by' => User::class,
@@ -105,7 +105,7 @@ class Ticket
         ];
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => [
@@ -116,5 +116,10 @@ class Ticket
                 new MinWords()
             ]
         ];
+    }
+
+    public function fillable(): array
+    {
+        return ['title', 'description'];
     }
 }
