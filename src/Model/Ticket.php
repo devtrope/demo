@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Rules\MinWords;
 use DateTime;
 use Ludens\Framework\ModelInterface;
+use Ludens\Validation\MinLength;
 use Ludens\Validation\Required;
 
 class Ticket implements ModelInterface
@@ -110,7 +111,8 @@ class Ticket implements ModelInterface
     {
         return [
             'title' => [
-                new Required()
+                new Required(),
+                new MinLength(3)
             ],
             'description' => [
                 new Required(),

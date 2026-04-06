@@ -1,0 +1,4 @@
+{
+    "required": "Tous les champs sont obligatoires",
+    "min_words": "Le champs :field doit contenir au moins :words mots"
+}
