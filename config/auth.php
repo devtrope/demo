@@ -61,7 +61,7 @@ return [
      */
     'security' => [
         '/login' => ['auth' => false],
-        '/*' => ['auth' => true, 'error' => 'Veuillez vous connecter pour accéder à cette page'],
+        '/*' => ['auth' => true],
         '/contact' => ['access' => true]
     ],
     
