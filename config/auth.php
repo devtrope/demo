@@ -61,6 +61,7 @@ return [
      */
     'security' => [
         '/login' => ['auth' => false],
+        '/locale' => ['access' => true],
         '/*' => ['auth' => true],
         '/contact' => ['access' => true]
     ],

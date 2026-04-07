@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }} — {% block title %}{% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name') }} - {% block title %}{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>
@@ -62,6 +63,12 @@
             <div class="flex items-center gap-6">
                 <a href="/" class="text-sm text-ink-secondary hover:text-ink-primary transition-colors">Accueil</a>
                 <a href="/contact" class="text-sm text-ink-secondary hover:text-ink-primary transition-colors">Contact</a>
+                <select name="locale"
+                    class="bg-transparent text-sm text-ink-secondary border border-surface-border rounded-md px-2 py-1 hover:border-accent/40 focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer pr-6"
+                    width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a5870' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 6px center;">
+                    <option value="fr" {% if locale() == 'fr' %}selected{% endif %}>🇫🇷 FR</option>
+                    <option value="en" {% if locale() == 'en' %}selected{% endif %}>🇬🇧 EN</option>
+                </select>
                 {% if auth is defined %}
                     <span class="text-sm text-ink-muted">|</span>
                     <span class="text-sm text-ink-primary font-medium">{{ auth.firstName ~ " " ~ auth.name }}</span>
@@ -102,5 +109,6 @@
         {% block content %}{% endblock %}
     </main>
 
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
