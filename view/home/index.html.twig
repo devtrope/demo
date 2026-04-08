@@ -28,11 +28,11 @@
                 {% endif %}
 
                 <a href="/ticket/index/{{ ticket.id }}" class="block flex-1">
-                    <h2 class="text-base font-medium text-ink-primary group-hover:text-accent transition-colors line-clamp-2 mb-2">
-                        {{ ticket.title }}
+                    <h2 class="text-base font-medium text-ink-primary group-hover:text-accent transition-colors mb-2">
+                        {{ ticket.title|truncate(50) }}
                     </h2>
-                    <p class="text-sm text-ink-secondary line-clamp-3 leading-relaxed">
-                        {{ ticket.description }}
+                    <p class="text-sm text-ink-secondary leading-relaxed">
+                        {{ ticket.description|truncate(100) }}
                     </p>
                 </a>
 
