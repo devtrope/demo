@@ -5,8 +5,8 @@ namespace App\Model;
 use App\Rules\MinWords;
 use DateTime;
 use Ludens\Framework\ModelInterface;
-use Ludens\Validation\MinLength;
-use Ludens\Validation\Required;
+use Ludens\Validation\Rules\MinLength;
+use Ludens\Validation\Rules\Required;
 
 class Ticket implements ModelInterface
 {

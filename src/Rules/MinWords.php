@@ -2,16 +2,11 @@
 
 namespace App\Rules;
 
-use Ludens\Translation\Translator;
+use Ludens\Validation\AbstractRule;
 use Ludens\Validation\Contracts\RuleInterface;
 
-class MinWords implements RuleInterface
+class MinWords extends AbstractRule implements RuleInterface
 {
-    public function __construct(
-        private Translator $translator = new Translator()
-    ) {
-    }
-
     public function validate(mixed $value): bool
     {
         $words = explode(' ', $value);
@@ -20,7 +15,7 @@ class MinWords implements RuleInterface
 
     public function message(string $field): string
     {
-        return $this->translator->get('validation.min_words', [
+        return $this->getTranslator()->get('validation.min_words', [
             'field' => $field,
             'words' => 3
         ]);

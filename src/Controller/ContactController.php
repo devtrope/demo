@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Ludens\Http\Request;
 use Ludens\Http\Response;
-use Ludens\Validation\Required;
+use Ludens\Validation\Rules\Required;
 
 class ContactController extends BaseController
 {
