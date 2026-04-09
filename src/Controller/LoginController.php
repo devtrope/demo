@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Ludens\Exceptions\Authentication\AuthenticationException;
 use Ludens\Http\Request;
 use Ludens\Http\Response;
 
