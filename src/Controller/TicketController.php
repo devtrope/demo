@@ -46,11 +46,11 @@ class TicketController extends BaseController
         $request->validate($ticket);
 
         $request->fill($ticket);
-        if ($request->hasFile('picture')) {
+        if ($request->getData()->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
         }
         $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
-        $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
+        $ticket->setAttributedTo($this->userRepository->find($request->getData()->get('attributed')));
 
         $ticket = $this->ticketRepository->save($ticket);
         $this->historyService->insert('Création du ticket', $ticket, $this->currentAuth());
@@ -68,14 +68,14 @@ class TicketController extends BaseController
 
     public function postUpdate(Request $request): Response
     {
-        $ticket = $this->ticketRepository->find($request->data('id'));
+        $ticket = $this->ticketRepository->find($request->getData()->get('id'));
         $request->validate($ticket);
 
         $ticket = $request->fill($ticket);
-        if ($request->hasFile('picture')) {
+        if ($request->getData()->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
         }
-        $ticket->setAttributedTo($this->userRepository->find($request->data('attributed')));
+        $ticket->setAttributedTo($this->userRepository->find($request->getData()->get('attributed')));
 
         $this->ticketRepository->save($ticket);
 
