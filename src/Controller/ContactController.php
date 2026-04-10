@@ -15,7 +15,7 @@ class ContactController extends BaseController
 
     public function postIndex(Request $request): Response
     {
-        $request->validate([
+        $request->validator()->validate([
             'mail' => [new Required()]
         ]);
         return $this->redirect('/', ['success' => 'Votre message a bien été envoyé']);

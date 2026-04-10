@@ -43,7 +43,7 @@ class TicketController extends BaseController
     public function postAdd(Request $request): Response
     {
         $ticket = new Ticket();
-        $request->validate($ticket);
+        $request->validator()->validate($ticket);
 
         $request->fill($ticket);
         if ($request->getData()->hasFile('picture')) {
@@ -69,7 +69,7 @@ class TicketController extends BaseController
     public function postUpdate(Request $request): Response
     {
         $ticket = $this->ticketRepository->find($request->getData()->get('id'));
-        $request->validate($ticket);
+        $request->validator()->validate($ticket);
 
         $ticket = $request->fill($ticket);
         if ($request->getData()->hasFile('picture')) {
