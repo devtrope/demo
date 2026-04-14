@@ -37,6 +37,17 @@
         </div>
 
         <div>
+            <label for="file" class="block text-sm text-ink-secondary mb-1.5">Fichier <span class="text-ink-muted">(optionnel)</span></label>
+            {% if ticket.file is not null %}
+                <div class="bg-surface-raised border border-surface-border rounded-xl px-3.5 py-2.5 mb-3 text-sm">
+                    {{ ticket.file }}
+                </div>
+            {% endif %}
+            <input type="file" name="file" id="file"
+                class="w-full bg-surface-raised border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-ink-muted file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-accent-muted file:text-accent file:text-xs file:font-medium cursor-pointer focus:outline-none focus:border-accent transition-colors">
+        </div>
+
+        <div>
             <label for="attributed" class="block text-sm text-ink-secondary mb-1.5">Attribué à</label>
             {% set attributed = old.attributed ?? ticket.attributedTo.id %}
             <select name="attributed" id="attributed"

@@ -14,6 +14,7 @@ class Ticket implements ModelInterface
     private string $title;
     private string $description;
     private ?string $picture;
+    private ?string $file;
     private bool $active;
     private User $created_by;
     private User $attributed_to;
@@ -57,6 +58,16 @@ class Ticket implements ModelInterface
     public function setPicture(?string $picture): void
     {
         $this->picture = $picture;
+    }
+
+    public function file(): null|string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): void
+    {
+        $this->file = $file;
     }
 
     public function active(): bool

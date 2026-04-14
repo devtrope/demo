@@ -49,6 +49,9 @@ class TicketController extends BaseController
         if ($request->getData()->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
         }
+        if ($request->getData()->hasFile('file')) {
+            $ticket->setFile($request->file('file')->upload());
+        }
         $ticket->setCreatedBy($this->userRepository->find($this->currentAuth()->id()));
         $ticket->setAttributedTo($this->userRepository->find($request->getData()->get('attributed')));
 
@@ -74,6 +77,9 @@ class TicketController extends BaseController
         $ticket = $request->fill($ticket);
         if ($request->getData()->hasFile('picture')) {
             $ticket->setPicture($request->image('picture')->upload());
+        }
+        if ($request->getData()->hasFile('file')) {
+            $ticket->setFile($request->file('file')->upload());
         }
         $ticket->setAttributedTo($this->userRepository->find($request->getData()->get('attributed')));
 
