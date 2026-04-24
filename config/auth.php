@@ -1,6 +1,9 @@
 <?php
 
 use App\Model\User;
+use Ludens\Auth\Security\Authentication;
+
+$authentication = new Authentication();
 
 return [
 
@@ -49,21 +52,13 @@ return [
     /*
      |-------------------------------------------------------------
      | Route security configuration
-     |
-     | Define which routes require authentication:
-     |
-     |  - auth => true : accessible only if the user is authenticated
-     |  - auth => false : accessible only if the user is NOT authenticated
-     |
-     |  - access => true : accessible for every user
-     |
      |-------------------------------------------------------------
      */
-    'security' => [
-        '/login' => ['auth' => false],
-        '/locale' => ['access' => true],
-        '/*' => ['auth' => true],
-        '/contact' => ['access' => true]
-    ],
+
+    'security' => $authentication
+        ->guest('/login')
+        ->public('/locale')
+        ->protected('/')
+        ->public('/contact')
     
 ];
